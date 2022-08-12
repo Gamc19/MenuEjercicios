@@ -1,0 +1,191 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package com.pruebanb.menuejercicios;
+
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ *
+ * @author gustavomoreno
+ */
+public class Main {
+    
+  class contras{
+      static String contrasena;
+  }  
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner scan = new Scanner(System.in);
+        
+        //solicitar opcion del menu
+        int opcion;
+
+        
+
+        do {
+            System.out.println("Elije el Número del Programa que Quieres Realizar");
+            System.out.println("1. Número Más Pequeño");
+            System.out.println("2. Caracter de en Medio");
+            System.out.println("3. Contador de Vocales");
+            System.out.println("4. Verificador de Contraseñas");
+            System.out.println("5. Promedio de Arreglos");
+            System.out.println("6. Máximo y Mínimo de un Arreglo"); 
+            System.out.println("7. Salir"); 
+            opcion = scan.nextInt();
+            
+            switch(opcion){
+                case 1 -> pequeno();
+                case 2 -> caracter();
+                case 3 -> vocales();
+                case 4 -> password();
+                case 5 -> promedio();
+                case 6 -> maxMin();
+                default -> {
+                }
+            }
+            
+        }while(opcion <= 6);
+    }
+    
+    public static void pequeno (){
+        System.out.println("Número Más Pequeño");
+        System.out.println("Introduzca tres números: ");
+        Scanner sc = new Scanner(System.in);
+        int n1, n2, n3;
+        n1 = sc.nextInt();
+        n2 = sc.nextInt();
+        n3 = sc.nextInt();
+        if (n1 < n2) {
+            if (n1 < n3) {
+                System.out.println("El menor es: " + n1);                                             
+            } else {
+                System.out.println("El menor es: " + n3);     
+            }
+        } else if (n2 < n3) {
+            System.out.println("El menor es: " + n2);
+        } else {
+            System.out.println("El menor es: " + n3);
+        }
+    }
+  
+    
+    public static void caracter (){
+        System.out.println("Caracter de en Medio");
+        System.out.println("Ingresa un String");
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int posicion;
+        int length;
+        if (str.length() % 2 == 1){
+            posicion = str.length() / 2;
+            length = 1;
+        }
+        else {
+            posicion = str.length() / 2 -1;
+            length = 2;
+        }
+        String car = str.substring(posicion, posicion + length);
+        System.out.println("Caracter(es) de en Medio: " + car);
+    }
+    
+    public static void vocales (){
+        System.out.println("Contador de Vocales");
+        System.out.println("Ingresa una String");
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int contador = 0;
+        for(int x=0;x<str.length();x++) {
+         if ((str.charAt(x)=='a') || (str.charAt(x)=='e') || (str.charAt(x)=='i') || (str.charAt(x)=='o') || (str.charAt(x)=='u')){ 
+    contador++;
+         }
+      }
+    System.out.println("La palabra tiene "+ contador + " vocales");       
+ }   
+
+    public static boolean safe (String contrasena){
+        
+        if (contrasena.length() > 8 ){
+            boolean letra = false;
+            boolean num = false;
+            boolean dosNum = false;
+            int digitCounter = 0;
+            char c;
+            for (int i=0; i<contrasena.length(); i++){
+                
+                c = contrasena.charAt(i);
+                if(Character.isDigit(c))
+                    digitCounter++;
+                        num = true;
+                        dosNum = true;
+                if(Character.isLetter(c))
+                    letra = true;
+            }
+            
+           if(num && letra && digitCounter >=2)
+               return true;
+           else
+               return false;
+        }else {
+           return false; 
+        }
+}
+    
+    public static void password (){
+        System.out.println("Verificador de Contraseñas");
+        System.out.println("La Contraseña debe tener al menos 8 caracteres");
+        System.out.println("La Contraseña debe tener debe tener letras y números");
+        System.out.println("La Contraseña debe tener al menos dos números");
+        System.out.println("Ingrese la contraseña: ");
+        Scanner sc = new Scanner(System.in);
+        String contrasena;
+        contrasena = sc.next();
+        
+        if (safe(contrasena))
+            System.out.println("La Contraseña es segura");
+        else
+            System.out.println("La Contraseña no es segura");
+    }
+    
+    public static void promedio (){
+        System.out.println("Promedio de Arreglos");
+        Random r = new Random();
+        int[] numeros = new int[10];
+        for(int i = 0; i < numeros.length; i++) {
+            numeros[i] = r.nextInt(100);
+            System.out.println(numeros[i] + "  "); 
+    }
+     double total = 0;
+        for (int i = 0; i < numeros.length; i++) {
+            total += numeros[i];
+        }
+    System.out.println("El promedio del arreglo es: " + (total/ numeros.length ));
+  }   
+    public static void maxMin (){
+        System.out.println("Máximo y Mínimo de un Arreglo");
+        Random r = new Random();
+        int[] numeros = new int[10];
+        for(int i = 0; i < numeros.length; i++) {
+            numeros[i] = r.nextInt(100);
+            System.out.println(numeros[i] + "  "); 
+        }
+     	
+        int maximo = numeros[0]; // Declaramos e inicializamos el máximo.
+	int minimo = numeros[0]; // Declaramos e inicializamos el máximo.
+
+	for (int i = 0; i < numeros.length; i++){
+            if (maximo < numeros[i])
+		maximo = numeros[i];
+            if (minimo > numeros[i])
+		minimo = numeros[i];
+		}
+        System.out.println("El máximo del arreglo es " + maximo);
+        System.out.println("El mínimo del arreglo es " + minimo);
+    }      
+}
